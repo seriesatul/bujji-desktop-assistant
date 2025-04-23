@@ -1,0 +1,187 @@
+body{
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    background-color: black; 
+}
+
+
+.head-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    
+}
+
+.ear{
+    height: 100px;
+    width: 50px;
+    background-color: white;
+    border-radius: 30px;
+}
+
+.head{
+   position: relative;
+   box-shadow: 0 0 20px rgb(255, 255, 255);
+   background-color: white;
+   height: 300px;
+   width: 400px;
+   border-radius: 50%;
+}
+
+.eyes{
+    position: relative;
+    top: 30%;
+    gap: 30px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.eye:nth-child(1){
+    height: 50px;
+    width: 130px;
+    border-radius: 30px 30px 0 0;
+    background-color: black;
+  
+}
+
+.eye:nth-child(2){
+    height: 50px;
+    width: 130px;
+    border-radius: 30px 30px 0 0;
+    background-color: black;
+   
+}
+
+.mouth{
+    position: relative;
+    top: 50%;
+    left: 30%;
+    height: 20px;
+    width: 150px;
+    background-color: black;
+    
+}
+
+.head-section.taiking{
+    animation: bobbing 0.5s infinite linear;
+}
+
+.mouth.talking {
+    animation: mouthTalk 0.5s infinite linear;
+
+}
+
+@keyframes mouthTalk {
+    0% {
+        height: 20px;
+        border-radius: 0 0 70% 70%;
+    }
+    50% {
+        height: 50px;
+        border-radius: 0 0 40% 40%;
+    }
+    100% {
+        height: 20px;
+        border-radius: 0 0 70% 70%;
+    }
+}
+
+.body-section{
+    margin-top: -20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+}
+
+.circle{
+    margin-top: -60px;
+    height: 100px;
+    width: 100px;
+    place-items: center;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.bob{
+    margin-top: -20px;
+    height: 100px;
+    width: 30px;
+    background-color: white;
+}
+
+.stand:nth-child(1){
+    margin-left: 50px;
+    border-radius: 20px 20px 0 0;
+    align-items: center;
+    width: 200px;
+    height: 50px;
+    background-color: white;
+}
+
+.stand:nth-child(2){
+    border-radius: 20px 20px 0 0;
+    width: 300px;
+    height: 50px;
+    background-color: white;
+}
+
+
+@keyframes bobbing{
+    0%{
+        transform: translateY(0px);
+    }
+    50%{
+        transform: translateY(-10px);
+    }
+    100%{
+        transform: translateY(0px);
+    }
+}
+
+@keyframes blink {
+    0%, 100% { height: 50px; }
+    50% { height: 40px; }
+}
+.eye {
+    animation: blink 3s infinite;
+}
+
+
+.head {
+    animation: glowPulse 3s infinite ease-in-out;
+}
+@keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 20px white; }
+    50% { box-shadow: 0 0 40px white; }
+}
+
+@keyframes tilt {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(-10deg); }
+    100% { transform: rotate(10deg); }
+}
+
+.tilt {
+    animation: tilt 1s ease-in-out;
+}
+
+@keyframes dance {
+    0% { transform: rotate(0deg) translateY(0); }
+    25% { transform: rotate(10deg) translateY(-10px); }
+    50% { transform: rotate(-10deg) translateY(10px); }
+    75% { transform: rotate(10deg) translateY(-10px); }
+    100% { transform: rotate(0deg) translateY(0); }
+}
+
+.dance {
+    animation: dance 0.5s infinite;
+}
+
+
+
+
+
