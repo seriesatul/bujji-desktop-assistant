@@ -8,6 +8,17 @@
 </head>
 <body>
 
+    <div class="heading">
+        <h1>How Can I help You??</h1>
+    </div>
+
+
+    <div class="bujji-talking" hidden>
+      <p class="message"></p>
+      <div id="siri-container"></div>
+      </div>
+
+
 <div class="head-section">
     <div class="ear"></div>
     <div class="head">
@@ -33,13 +44,44 @@
         <div class="stand"></div>
     </div>
 </div>
+
+<div class="input-container">
+    <input type="text" placeholder="Type your message here..." aria-label="Message input">
+    <div class="button-container">
+      <button class="btn btn-chat" aria-label="Chat options">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="1"></circle>
+          <circle cx="12" cy="5" r="1"></circle>
+          <circle cx="12" cy="19" r="1"></circle>
+        </svg>
+      </button>
+      <button class="btn btn-mic" aria-label="Voice input">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+          <line x1="12" y1="19" x2="12" y2="23"></line>
+          <line x1="8" y1="23" x2="16" y2="23"></line>
+        </svg>
+      </button>
+      <button class="btn btn-send" aria-label="Send message">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+
     
 
     
     
-
-
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <script src="https://unpkg.com/siriwave/dist/siriwave.umd.min.js"></script>
+   <script src="/eel.js"></script>
+   <script src="controller.js"></script>
     <script src="script.js"></script>
-    <script src="/eel.js"></script>
+   
 </body>
 </html>

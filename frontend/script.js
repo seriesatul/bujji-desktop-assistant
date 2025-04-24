@@ -119,6 +119,24 @@ window.onload = () => {
 }
 
 
+var siriWave = new SiriWave({
+    container: document.getElementById("siri-container"),
+    width: 340,
+    height: 100,
+    speed:0.10
+  });
+
+  var micbtn = document.querySelector(".btn-mic");
+  var heading = document.querySelector(".heading");
+  var siriWave = document.querySelector(".bujji-talking");
+
+    micbtn.addEventListener("click", function() {
+        heading.style.display = "none";
+        siriWave.style.display = "block";
+        eel.takeCommand()();
+
+    })
+
 
 
 
