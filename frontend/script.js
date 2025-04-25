@@ -133,9 +133,29 @@ var siriWave = new SiriWave({
     micbtn.addEventListener("click", function() {
         heading.style.display = "none";
         siriWave.style.display = "block";
-        eel.takeCommand()();
+        eel.allCommand()();
 
     })
+
+eel.expose(startMouthAnimation);
+function startMouthAnimation() {
+    document.querySelector('.mouth').classList.add('talking');
+}
+
+eel.expose(stopMouthAnimation);
+function stopMouthAnimation() {
+    document.querySelector('.mouth').classList.remove('talking');
+}
+
+function nodHead() {
+    const head = document.querySelector(".head");
+    head.classList.add("nod");
+    setTimeout(() => head.classList.remove("nod"), 500);
+  }
+  eel.expose(nodHead);
+  
+
+
 
 
 
