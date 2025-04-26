@@ -220,18 +220,22 @@ body{
     background: transparent;
     padding: 10px 0;
     font-size: 1rem;
-    color: #333;
+    color: #fff;
     outline: none;
   }
   
   .input-container input::placeholder {
-    color: #999;
+    color: #ffffff56;
   }
   
   .button-container {
     display: flex;
     gap: 8px;
   }
+
+  
+
+  
   
   .btn {
     border: none;
@@ -331,6 +335,61 @@ body{
   .head.nod {
     animation: nod 0.5s ease;
   }
+
+
+  #chatCanvas {
+    position: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+    top: 0;
+    left: -600px; /* Hidden initially */
+    width: 400px; /* Made it narrower for better UX */
+    height: 100%;
+    background-color: #1c1c1c;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    transition: left 0.3s ease-in-out;
+    z-index: 1001;
+    overflow-y: auto; /* Added scrolling for content */
+  }
+  
+  /* Overlay to detect outside clicks */
+  #overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .sender_message{
+    background-color: #000;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 5px 0;
+    max-width: 80%;
+    align-self: flex-end;
+    text-align: right;
+  }
+
+  .receiver_message{
+    background-color: #f1f1f1;
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 5px 0;
+    max-width: 80%;
+    align-self: flex-start;
+    text-align: left;
+  }
+
+
+
+  
   
   
 

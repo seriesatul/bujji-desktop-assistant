@@ -5,11 +5,12 @@ import eel
 from engine.features import *
 from engine.command import *
 
-eel.init("frontend")
+def start():
+    eel.init("frontend")
 
-playAssistantInitSound()
-# Open the default web browser with the specified URL
+    playAssistantInitSound()
+    # Open the default web browser with the specified URL
 
-os.system('start msedge.exe --app="http://localhost:8000/index.html"')
+    os.system('start msedge.exe --app="http://localhost:8000/index.html"')
 
-eel.start("index.html", mode=None,host='localhost', block=True)
+    eel.start("index.html", mode=None,host='localhost', block=True)

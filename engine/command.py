@@ -3,14 +3,15 @@ import eel
 import time
 
 def speak(text):
+    text = str(text)
     eel.startMouthAnimation()  # JS trigger
-    time.sleep(-1)  # tiny delay to sync
     engine = pyttsx3.init('sapi5')
     voices = engine.getProperty('voices')
     engine.setProperty('voice',voices[1].id)
-    engine.setProperty('rate', 174)  # Speed of speech
+    engine.setProperty('rate', 180)  # Speed of speech
     eel.DisplayMessage(text)  # Display message in the UI
     engine.say(text)
+    eel.receiverText(text)  # JS trigger to show text in the UI
     engine.runAndWait()
     eel.stopMouthAnimation()  # JS trigger
     estimated_duration = len(text.split()) / 2.5  # avg 2.5 words per second
@@ -48,30 +49,63 @@ def takeCommand():
 
 @eel.expose
 def allCommand():
-    query = takeCommand()
-    print(query)
 
-    if "open" in query:
-        from engine.features import openCommand
-        openCommand(query)
+    try:
+       
+        query = takeCommand()
+        print(query)
+        eel.senderText(query)
 
-    elif "on youtube":
-        from engine.features import openYoutube
-        openYoutube(query)
-     
+        eel.DisplayMessage(query)  # Display message in the UI
+        
+        
 
+        if "open" in query:
+            from engine.features import openCommand
+            openCommand(query)
 
-    if 'hello' in query:
-        speak("Hello! How can I assist you today?")
-    elif 'how are you' in query:
-        speak("I am fine, thank you! How can I help you?")
-    elif 'what is your name' in query:
-        speak("I am your virtual assistant.")
-    elif 'exit' in query or 'quit' in query:
-        speak("Goodbye! Have a great day!")
-        exit()
+        elif "on youtube" in query:
+            from engine.features import openYoutube
+            openYoutube(query)
 
-    eel.showHeading()
+        elif "send message" in query or "phone call" in query or "video call" in query:
+            from engine.features import findContact,whatsapp
+            flag =""
+            contact_no,name = findContact(query)
+            if contact_no != 0:
+
+                if "send message" in  query:
+                    flag = "message"
+                    speak("Tell me the message you want to send to"+" "+name)
+                    query = takeCommand()
+
+                elif "phone call" in query:
+                    flag = "call"
+                    speak("Calling to"+" "+name)   
+
+                else:
+                    flag = "video call"
+                    speak("Starting video call with"+" "+name)  
+
+                whatsapp(contact_no,query,flag,name)      
+
+        else:
+                from engine.features import chatBot
+                chatBot(query)
+                # takeCommand()
+                eel.showHeading()
+
+                return
+
+        
+
+        eel.showHeading()
+
+    except Exception as error:    
+        
+        print(error)
+        eel.DisplayMessage("Error in command execution")
+        return "None" 
 
    
 

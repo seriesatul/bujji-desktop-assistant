@@ -5,18 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BUJJI</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="assets/images/Screenshot 2025-04-22 222107.png" type="image/x-icon">
+    
 </head>
 <body>
 
+  <div class="top-section">
     <div class="heading">
-        <h1>How Can I help You??</h1>
+      <h1>How Can I help You??</h1>
+  </div>
+
+
+  <div class="bujji-talking" hidden>
+    <p class="message"></p>
+    <div id="siri-container"></div>
     </div>
+  </div>
 
-
-    <div class="bujji-talking" hidden>
-      <p class="message"></p>
-      <div id="siri-container"></div>
-      </div>
+    
 
 
 <div class="head-section">
@@ -46,8 +52,9 @@
 </div>
 
 <div class="input-container">
-    <input type="text" placeholder="Type your message here..." aria-label="Message input">
+    <input type="text" class="chatbox" placeholder="Type your message here..." aria-label="Message input">
     <div class="button-container">
+
       <button class="btn btn-chat" aria-label="Chat options">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="1"></circle>
@@ -55,7 +62,7 @@
           <circle cx="12" cy="19" r="1"></circle>
         </svg>
       </button>
-      <button class="btn btn-mic" aria-label="Voice input">
+      <button class="btn btn-mic" id="chatbtn" aria-label="Voice input">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
           <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
@@ -73,15 +80,92 @@
   </div>
 
 
+
+
+  <div id="chatCanvas">
+    <h2>Chat-History</h2>
+    <p>You can see your old messages here</p>
+    <div id="chat-canvas-body"></div>
+  </div>
+
+  <!-- Overlay to detect outside clicks -->
+  <div id="overlay"></div>
+
+<script>
+  
+const chatBtn = document.querySelector('.btn-chat'); // Changed from chatbtn to match your HTML
+const chatCanvas = document.getElementById('chatCanvas');
+const overlay = document.getElementById('overlay');
+
+
+// Open chat
+chatBtn.addEventListener('click', () => {
+    console.log("Chat button clicked"); // Debugging line
+  chatCanvas.style.left = '0'; // Directly change the style instead of using classes
+  overlay.style.display = 'block'; // Show the overlay
+});
+
+// Close chat when clicking on overlay
+overlay.addEventListener('click', () => {
+    console.log("Overlay clicked"); // Debugging line
+  chatCanvas.style.left = '-600px'; // Hide the chat panel
+  overlay.style.display = 'none'; // Hide the overlay
+});
+
+// Close chat when clicking outside (fallback)
+document.addEventListener('click', (e) => {
+  // Only run this if the chat is open
+  if (chatCanvas.style.left === '0px') {
+    // Check if click is outside chat and not on the chat button
+    if (!chatCanvas.contains(e.target) && !chatBtn.contains(e.target)) {
+      chatCanvas.style.left = '-600px';
+      overlay.style.display = 'none';
+    }
+  }
+});
+
+eel.expose(senderText)
+  function senderText(message) {
+      var chatBox = document.getElementById("chat-canvas-body");
+      if (message.trim() !== "") {
+          chatBox.innerHTML += `
+          <div class = "width-size">
+          <div class="sender_message">${message}</div>
+      </div>`; 
+  
+          // Scroll to the bottom of the chat box
+          chatBox.scrollTop = chatBox.scrollHeight;
+      }
+  }
+
+  eel.expose(receiverText)
+  function receiverText(message) {
+
+      var chatBox = document.getElementById("chat-canvas-body");
+      if (message.trim() !== "") {
+          chatBox.innerHTML += `
+          <div class = "width-size">
+          <div class="receiver_message">${message}</div>
+      </div>`; 
+  
+          // Scroll to the bottom of the chat box
+          chatBox.scrollTop = chatBox.scrollHeight;
+      }
+      
+  }
+  
+
+  </script>
+
     
 
     
-    
+  
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <script src="https://unpkg.com/siriwave/dist/siriwave.umd.min.js"></script>
    <script src="/eel.js"></script>
    <script src="controller.js"></script>
-    <script src="script.js"></script>
+   <script src="script.js"></script>
    
 </body>
 </html>

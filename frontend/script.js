@@ -38,18 +38,23 @@ recognition.onresult = (event) => {
     }
 };
 
+
+eel.expose(smile);
 function smile() {
     document.querySelector('.mouth').style.borderRadius = "0 0 70% 70%";
     document.querySelector('.mouth').style.height = "50px";
     
 }
 
+
+eel.expose(sadFace);
 function sadFace() {
     document.querySelector('.mouth').style.borderRadius = "70% 70% 0 0";
 }
 
 recognition.start();
 
+eel.expose(partyMode);
 function partyMode() {
     const head = document.querySelector('.head-section');
     head.classList.add('dance');
@@ -59,64 +64,8 @@ function partyMode() {
 }
 
 
-function speak(text) {
-    const utterance = new SpeechSynthesisUtterance(text);
-    const mouth = document.querySelector('.mouth');
-
-    // Set pitch, rate, and volume (feel free to tweak)
-    utterance.pitch = 1.2;  // Slightly more lively
-    utterance.rate = 1;     
-    utterance.volume = 1;
-
-    // Load voices and pick a female one
-    const voices = speechSynthesis.getVoices();
-    const femaleVoice = voices.find(voice => 
-        voice.name.toLowerCase().includes('female') ||
-        voice.name.toLowerCase().includes('woman') ||
-        voice.name.toLowerCase().includes('google us english') || // This one is clean and feminine
-        voice.name.toLowerCase().includes('zira') // Zira is default MS female voice
-    );
-
-    if (femaleVoice) {
-        utterance.voice = femaleVoice;
-    } else {
-        console.log("No female voice found, using default.");
-    }
-
-    // Handle mouth animation
-    utterance.onstart = () => mouth.classList.add('talking');
-    utterance.onend = () => mouth.classList.remove('talking');
-
-    // Speak!
-    speechSynthesis.speak(utterance);
-}
 
 
-let bujjiVoice = null;
-
-window.speechSynthesis.onvoiceschanged = () => {
-    const voices = window.speechSynthesis.getVoices();
-
-    // Try to find a nice female voice
-    bujjiVoice = voices.find(voice => 
-        voice.name.toLowerCase().includes('female') ||
-        voice.name.toLowerCase().includes('zira') ||
-        voice.name.toLowerCase().includes('google uk english female') ||
-        voice.name.toLowerCase().includes('samantha')
-    );
-
-    console.log("Available Voices:", voices);
-    console.log("BUJJI Voice Selected:", bujjiVoice ? bujjiVoice.name : "None");
-};
-
-window.onload = () => {
-    // Set a default voice if none is selected
-    if (!bujjiVoice) {
-        const voices = window.speechSynthesis.getVoices();
-        bujjiVoice = voices[0]; // Fallback to the first available voice
-    }
-    speechSynthesis.cancel(); // Stop any ongoing speech
-}
 
 
 var siriWave = new SiriWave({
@@ -137,6 +86,25 @@ var siriWave = new SiriWave({
 
     })
 
+    function docKeyUP(e){
+
+        if(e.key === "j" && e.metaKey){
+            heading.style.display = "none";
+            siriWave.style.display = "block";
+            eel.allCommand()();
+        }
+
+    }
+
+    document.addEventListener("keyup", docKeyUP,false);
+
+
+
+
+
+
+
+
 eel.expose(startMouthAnimation);
 function startMouthAnimation() {
     document.querySelector('.mouth').classList.add('talking');
@@ -153,6 +121,11 @@ function nodHead() {
     setTimeout(() => head.classList.remove("nod"), 500);
   }
   eel.expose(nodHead);
+  
+
+  // Chat panel functionality - Fixed version
+
+
   
 
 
